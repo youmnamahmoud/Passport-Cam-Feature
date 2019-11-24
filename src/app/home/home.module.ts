@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 
 import { OCR } from '@ionic-native/ocr/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { OCR } from '@ionic-native/ocr/ngx';
   ],
   providers: [
     OCR,
+    Camera,
   ],
   declarations: [HomePage]
 })

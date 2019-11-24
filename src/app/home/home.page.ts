@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-scanner';
 import { OCR, OCRSourceType, OCRResult } from '@ionic-native/ocr/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-home',
@@ -15,27 +16,20 @@ export class HomePage {
   expiryDate = "";
   birthDay = "";
   countryCode = "";
-  constructor(private ocr: OCR) {}
+  constructor(private ocr: OCR, private camera: Camera) {}
 
   onPickImage() {
-    let opts: DocumentScannerOptions = {};
-     DocumentScanner.scanDoc(opts)
-      .then((res: string) => {
-        this.ocr.recText(OCRSourceType.NORMFILEURL, res)
-        // console.log(res)
-    // this.ocr.recText(OCRSourceType.NORMFILEURL, "file:///storage/emulated/0/1998CAM/lva.jpg")
+    // let opts: DocumentScannerOptions = {};
+    //  DocumentScanner.scanDoc(opts)
+    // .then((res: string) => {
+
+    this.camera.getPicture().then((res) => {
+      this.ocr.recText(OCRSourceType.NORMFILEURL, res)
     // this.ocr.recText(OCRSourceType.NORMFILEURL, "file:///storage/emulated/0/1998CAM/ehabpass.jpg")
     .then((res: OCRResult) => {
-      console.log(res)
       let data = '';
       let i = res['lines']['linetext'].length;
       res['lines']['linetext'].forEach(element => {
-        // if (element.match(/<{5}[0-9]{2}/gi)) {
-        //   data = element
-        //   console.log("--------------------------",data)
-        // }
-        // else if (element = res['lines']['linetext'][i-1]) {
-        // else {
           if(res['lines']['linetext'][i-1]) {
           data = res['lines']['linetext'][i-1]
           console.log("--------------------------",data)
@@ -78,28 +72,19 @@ export class HomePage {
       }
       this.nat = nationality;
 
-
       console.log("Passport Num:", passportNum)
       console.log("Country Code: ", country)
       console.log("Date of birth: ", dob)
       console.log("Expiary Date: ", expdate)
       console.log("Nationality:", nationality)
-
-      // --------------------------------
-      // console.log("Passport Number", res["lines"]["linetext"][3])
-      
-      // console.log("Expiry Date", res["lines"]["linetext"][16])
-
-      // for(var i=0; i<res["lines"]["linetext"].length; i++){
-      //   if(res["lines"]["linetext"][i]=="Nationality"){
-      //     console.log("Nationality", res["lines"]["linetext"][i+1])
-      //   }
-      // }
     })
     .catch((error: any) => console.error(error));
-  })
-      .catch((error: any) => console.error(error));
-  }
- 
+  // })
+      // .catch((error: any) => console.error(error));
+    }, (err) => {
+      console.log(err);
+     });
 
+    }
+    
 }
