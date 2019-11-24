@@ -1,14 +1,33 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Scan Your Passport
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-button (click)="onPickImage()" color="dark"> <ion-icon name="camera"></ion-icon>&nbsp; Scan Your Passport</ion-button>
+
+  <ion-item>
+    <ion-label position="floating">Passport Number</ion-label>
+    <ion-input [value]="passNo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Nationality</ion-label>
+    <ion-input [value]="nat"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Country Code</ion-label>
+    <ion-input [value]="countryCode"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Expiry Date</ion-label>
+    <ion-input [value]="expiryDate"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Date of Birth</ion-label>
+    <ion-input [value]="birthDay"></ion-input>
+  </ion-item>
+  
 </ion-content>

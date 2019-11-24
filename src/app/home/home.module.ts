@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
+import { OCR } from '@ionic-native/ocr/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +19,9 @@ import { HomePage } from './home.page';
         component: HomePage
       }
     ])
+  ],
+  providers: [
+    OCR,
   ],
   declarations: [HomePage]
 })

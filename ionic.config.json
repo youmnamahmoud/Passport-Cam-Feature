@@ -1,5 +1,7 @@
 {
   "name": "PassCamScanner",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
