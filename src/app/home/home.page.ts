@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-scanner';
+// import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-scanner';
 import { OCR, OCRSourceType, OCRResult } from '@ionic-native/ocr/ngx';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-home',
@@ -23,12 +23,17 @@ export class HomePage {
     //  DocumentScanner.scanDoc(opts)
     // .then((res: string) => {
 
-    this.camera.getPicture().then((res) => {
+    var cameraOptions = {
+      encodingType: this.camera.EncodingType.JPEG,
+      correctOrientation: true
+    };
+
+    this.camera.getPicture(cameraOptions).then((res) => {
       console.log(res)
       this.ocr.recText(OCRSourceType.NORMFILEURL, res)
     // this.ocr.recText(OCRSourceType.NORMFILEURL, "file:///storage/emulated/0/1998CAM/gamal.jpg")
     .then((res: OCRResult) => {
-      console.log(res)
+      console.log( res['lines']['linetext'])
       let data = '';
       this.passNo = '';
       this.countryCode = '';
