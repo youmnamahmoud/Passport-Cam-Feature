@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { DocumentScanner, DocumentScannerOptions } from '@ionic-native/document-scanner';
 import { OCR, OCRSourceType, OCRResult } from '@ionic-native/ocr/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 
@@ -19,10 +18,6 @@ export class HomePage {
   constructor(private ocr: OCR, private camera: Camera) { }
 
   onPickImage() {
-    // let opts: DocumentScannerOptions = {};
-    //  DocumentScanner.scanDoc(opts)
-    // .then((res: string) => {
-
     const cameraOptions = {
       encodingType: this.camera.EncodingType.JPEG,
       correctOrientation: true
@@ -40,12 +35,7 @@ export class HomePage {
         this.birthDay = '';
         this.expiryDate = '';
         this.nat = '';
-        // let i = res['lines']['linetext'].length;
         res2[firstParam][secondParam].forEach(element => {
-          // if(res['lines']['linetext'][i-1]) {
-          // data = res['lines']['linetext'][i-1]
-          // console.log("--------------------------",data)
-          // }
           element = element.replace(/\s/g, '');
           const line = element.match(/.{10}[A-Za-z]{3}[0-9]{7}[A-Za-z]{1}[0-9]{7}/gi);
           if (line) {
@@ -93,8 +83,6 @@ export class HomePage {
         }
       })
         .catch((error: any) => console.error(error));
-      // })
-      // .catch((error: any) => console.error(error));
     }, (err) => {
       console.log(err);
     });
